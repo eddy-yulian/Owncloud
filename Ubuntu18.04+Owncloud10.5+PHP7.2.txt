@@ -8,7 +8,7 @@ https://youtu.be/Vk5V1UoTSWI
 sudo su
 
 3. Check update OS
-apt update -y && sudo apt upgrade -y
+apt update -y && apt upgrade -y
 
 4. Install apache2 + (php7.2 & modules)
 add-apt-repository ppa:ondrej/php
@@ -17,37 +17,42 @@ apt install apache2 libapache2-mod-php7.2 openssl php-imagick php7.2-common php7
 5. Verify Apache is installed
 dpkg -l apache2
 
-6. Restart apache web server
+6. Switch PHP version
+update-alternatives --config php
+Insert selection number of PHP 7.2 version
+
+7. Restart apache web server
 systemctl start apache2
 systemctl enable apache2
 
-7. Access apache web server
+8. Access apache web server
 http://localhost
 
-8. Install mariaDB
+
+9. Install mariaDB
 apt install mariadb-server
 
-9. Securing mysql server
+10. Securing mysql server
 mysql_secure_installation
 	
-10. Create an owncloud db
+11. Create an owncloud db
 mysql -u root -p
 	CREATE DATABASE owncloud_db;
 	GRANT ALL ON owncloud_db.* TO 'owncloud_user'@'localhost' IDENTIFIED BY 'StrongP@ssword';
 	FLUSH PRIVILEGES;
 	EXIT;
 
-11. Download Owncloud (owncloud-10.5.zip)
+12. Download Owncloud (owncloud-10.5.zip)
 https://owncloud.com/older-versions/
 
-12. Extract zip installer file
+13. Extract zip installer file
 unzip owncloud-10.5.zip -d /var/www/
 
-13. set permission
+14. set permission
 chown -R www-data:www-data /var/www/owncloud/
 chmod -R 755 /var/www/owncloud/
 
-14. Configure apache for Owncloud
+15. Configure apache for Owncloud
 nano /etc/apache2/conf-available/owncloud.conf
 Copy paste this text:
 Alias /owncloud "/var/www/owncloud/"
@@ -64,7 +69,7 @@ Alias /owncloud "/var/www/owncloud/"
 
 </Directory>
 
-15. Enable apache modules and newly added configuration
+16. Enable apache modules and newly added configuration
 a2enconf owncloud
 systemctl reload apache2
 a2enmod rewrite
@@ -75,7 +80,7 @@ a2enmod env
 a2enmod dir
 a2enmod mime
 
-16. Configure owncloud on browser
+17. Configure owncloud on browser
 http://localhost/owncloud
 Create your admin account
 	Username: <your new login>
