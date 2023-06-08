@@ -20,7 +20,7 @@ dpkg -l apache2
 
 6. Switch PHP version
 update-alternatives --config php
-Insert selection number of PHP 7.2 version
+---Insert selection number of PHP 7.2 version"---
 
 7. Restart apache web server
 systemctl start apache2
@@ -49,6 +49,7 @@ https://owncloud.com/older-versions/
 --------------
 cd Downloads
 ls
+--------------
 
 13. Extract zip installer file
 unzip owncloud-10.5.zip -d /var/www/
